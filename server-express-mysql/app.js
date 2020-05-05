@@ -6,6 +6,7 @@ var models = require("./models");
 var cors = require("cors");
 
 var tasksRouter = require("./routes/tasks");
+var workoutsRouter = require("./routes/workouts");
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/tasks", tasksRouter);
+app.use("/workouts", workoutsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

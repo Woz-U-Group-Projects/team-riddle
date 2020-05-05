@@ -38,7 +38,7 @@ class Task extends React.Component {
   render() {
     return (
       <div>
-        <h3>List of Exercises </h3>
+        <h3>List of Tasks </h3>
         <input ref={this.taskName} />
         <button type="button" className="btn btn-primary" onClick={this.addTask}>add</button>
         <ul>
