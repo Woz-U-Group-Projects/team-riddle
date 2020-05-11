@@ -21,10 +21,8 @@ class RegisterForm extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault()
-
-        this.setState({ submitted: true });
-        const { user } = this.state;
-        if (user.firstName && user.lastName && user.email && user.password) {
+        let user ={};
+        if (this.state.firstName && this.state.lastName && this.state.email && this.state.password) {
 
             register(user).then(res => {
                 if (res) {
@@ -37,26 +35,25 @@ class RegisterForm extends React.Component {
         }
     }
     render() {
-        const { user } = this.state;
         return (
             <div className="card-container">
                 <h3>Register</h3>
                 <form id="signup" name="signup" noValidate onSubmit={this.handleSubmit}>
                     <div>
                         <label htmlFor="firstName">First Name: </label>
-                        <input type="text" name="firstName" value={user.firstName} onChange={this.handleChange} required></input>
+                        <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required></input>
                     </div>
                     <div>
                         <label htmlFor="lastName">Last Name: </label>
-                        <input type="text" name="lastName" value={user.lastName} onChange={this.handleChange} required></input>
+                        <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required></input>
                     </div>
                     <div>
                         <label htmlFor="email">Email: </label>
-                        <input type="text" name="email" value={user.email} onChange={this.handleChange} required></input>
+                        <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required></input>
                     </div>
                     <div>
                         <label htmlFor="password">Password: </label>
-                        <input type="text" name="password" value={user.password} onChange={this.handleChange} required></input>
+                        <input type="text" name="password" value={this.state.password} onChange={this.handleChange} required></input>
                     </div>
                     <div>
                         <button type="submit">Submit</button>
