@@ -1,20 +1,28 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Workout = sequelize.define(
-    "Workout",
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      name: DataTypes.STRING,
-      complete: DataTypes.BOOLEAN
-    },
-    {}
-  );
-  Workout.associate = function(models) {
-    // associations can be defined here
-  };
-  return Workout;
+    const workouts = sequelize.define(
+        "workouts",
+        {
+            workoutId: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            userId: DataTypes.INTEGER,
+            workoutStatus: DataTypes.STRING,
+            workoutName: DataTypes.STRING,
+            noOfSets: DataTypes.INTEGER,
+            noOfReps: DataTypes.INTEGER,
+            noOfWeights: DataTypes.INTEGER,
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+            Deleted: DataTypes.BOOLEAN,
+        },
+    );
+    workouts.associate = function (models) {
+        workouts.belongsTo(models.users, {
+            foreignKey: "userId"
+        });
+    };
+    return workouts;
 };

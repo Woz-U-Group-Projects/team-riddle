@@ -1,39 +1,113 @@
 var express = require("express");
 var router = express.Router();
-var models = require("../models");
+var models = require("../models"); //<--- Add models
+var authService = require("../services/auth"); //<--- Add authentication service
 
 
 
-router.get("/", function(req, res, next) {
-  models.Workout.findAll().then(workouts => res.json(workouts));
-  
+router.get("/", function (req, res, next) {
+  let token = req.cookies.jwt;
+  if (token) {
+    authService.verifyUser(token).then(user => {
+      if (user) {
+        models.workouts
+          .findAll({
+            where: { userId: user.userId, Deleted: false }
+          })
+          .then(result => res.render("workouts", { workouts: result }));
+        //console.log(user.posts);
+        //res.render("posts", { posts: user.posts });
+        //res.send(JSON.stringify(user));
+      } else {
+        res.status(401);
+        res.send("Invalid authentication token");
+      }
+    });
+  } else {
+    res.status(401);
+    res.send("Must be logged in");
+  }
 });
 
-router.post("/", function(req, res, next) {
-  let newWorkout = new models.Workout();
-  newWorkout.name = req.body.name;
-  newWorkout.complete = req.body.complete;
-  newWorkout.save().then(workout => res.json(workout));
-});
-
-router.delete("/:id", function(req, res, next) {
+router.get("/:id", (req, res) => {
   let workoutId = parseInt(req.params.id);
-  models.Workout.findByPk(workoutId)
-    .then(workout => workout.destroy())
-    .then(() => res.send({ workoutId }))
-    .catch(err => res.status(400).send(err));
+  models.workouts
+    .find({
+      where: {
+        workoutId: workoutId,
+      },
+      include: [models.users]
+    })
+    .then(workout => {
+      res.send(JSON.stringify(workout))
+    })
 });
 
-router.put("/:id", function(req, res, next) {
-  models.Workout.update(
-    {
-      name: req.body.name,
-      complete: req.body.complete
+router.post("/", function (req, res, next) {
+  let token = req.cookies.jwt;
+  if (token) {
+    authService.verifyUser(token).then(user => {
+      if (user) {
+        models.workouts
+          .findOrCreate({
+            where: {
+              userId: req.body.userId,
+              workoutName: req.body.workoutName,
+              noOfSets: req.body.noOfSets,
+              noOfReps: req.body.noOfReps,
+              noOfWeights: req.body.noOfWeights,
+            }
+          })
+          .spread((result, created) => res.redirect("/workouts"));
+      } else {
+        res.status(401);
+        res.send("Invalid authentication token");
+      }
+    });
+  } else {
+    res.status(401);
+    res.send("Must be logged in");
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  let workoutId = parseInt(req.params.id);
+  models.workouts
+    .update(
+      {
+        Deleted: 'true'
+      },
+      {
+        where: {
+          workoutId: workoutId
+        },
+
+      })
+    .then(workout => {
+      res.send(JSON.stringify(workout))
+    })
+});
+
+router.put("/:id", (req, res) => {
+  let workoutId = parseInt(req.params.id);
+  models.workouts
+    .update({
+      userId: req.body.userId,
+      workoutName: req.body.workoutName,
+      noOfSets: req.body.noOfSets,
+      noOfReps: req.body.noOfReps,
+      noOfWeights: req.body.noOfWeights,
+      workoutStatus: req.body.workoutStatus,
     },
-    {
-      where: { id: parseInt(req.params.id) }
-    }
-  ).then(workout => res.json(workout));
+      {
+        where: {
+          workouId: workoutId
+        },
+
+      })
+    .then(workout => {
+      res.send(JSON.stringify(workout));
+    });
 });
 
 
