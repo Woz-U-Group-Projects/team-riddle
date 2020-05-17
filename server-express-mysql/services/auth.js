@@ -1,46 +1,42 @@
-const jwt = require('jsonwebtoken');
-const models = require('../models/index');
-const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+const models = require("../models/index");
+const bcrypt = require("bcryptjs");
 
-var authService = {}
-
-authService.signUser = user => {
-    const token = jwt.sign({
-        userName: user.userName,
+var auth = {
+  signUser: function(user) {
+    const token = jwt.sign(
+      {
         userId: user.userId,
-    },
-        'secretkey',
-        {
-            expiresIn: '1h'
-        });
-    return token
-}
-
-
-authService.verifyUser = token => {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        isLoggedIn: true
+      },
+      "secretkey",
+      {
+        expiresIn: "1h"
+      }
+    );
+    return token;
+  },
+  verifyUser: function(token) {
+    //<--- receive JWT token as parameter
     try {
-        let decoded = jwt.verify(token, 'secretkey');
-        return models.users.findByPk(decoded.userId);
+      let decoded = jwt.verify(token, "secretkey"); //<--- Decrypt token using same key used to encrypt
+      return models.users.findByPk(decoded.UserId); //<--- Return result of database query as promise
+    } catch (err) {
+      console.log(err);
+      return null;
     }
-    catch (error) {
-        console.log(err);
-        return resizeBy.status(401).json({
-            message: 'Authorization Failed'
-        });
-    }
-};
-
-authService.hashPassword = plainTextPassword => {
-
+  },
+  hashPassword: function(plainTextPassword) {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(plainTextPassword, salt);
     return hash;
-
+  },
+  comparePasswords: function(plainTextPassword, hashedPassword) {
+    return bcrypt.compareSync(plainTextPassword, hashedPassword);
+  }
 };
 
-authService.comparePasswords = (plainTextPassword, hashedPassword) => {
-    return bcrypt.compareSync(plainTextPassword, hashedPassword)
-}
-
-
-module.exports = authService;
+module.exports = auth;

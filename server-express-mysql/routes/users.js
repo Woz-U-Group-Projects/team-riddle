@@ -1,17 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models');
-const auth = require('../services/auth');
+var auth = require('../services/auth');
 
 
-router.get('/login', function (req, res, next) {
-  res.render('login');
-})
 router.get('/register', function (req, res, next) {
   res.render('register');
 })
 router.post('/register', function (req, res, next) {
-  const hashedPassword = auth.hashPassword(req.body.password);
   models.users
     .findOne({
       where: {
@@ -29,7 +25,7 @@ router.post('/register', function (req, res, next) {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: hashedPassword,
+            Password: auth.hashPassword(req.body.password), //<--- Change to this code here
             username: req.body.email
           })
           .then(createdUser => {
@@ -53,7 +49,6 @@ router.get('/login', function (req, res, next) {
   res.render('login');
 })
 router.post('/login', function (req, res, next) {
-  const hashedPassword = auth.hashPassword(req.body.password);
   models.users
     .findOne({
       where: {
@@ -68,7 +63,7 @@ router.post('/login', function (req, res, next) {
         });
       }
       else {
-        let passwordMatch = authService.comparePassword(
+        let passwordMatch = auth.comparePasswords(
           req.body.password,
           user.password
         );
@@ -105,7 +100,7 @@ router.get('/logout', function (req, res,next) {
 });
 
 
-// To DO CRUD
+// CRUD
 
 router.post('/userworkouts', function (req, res, next) {
 

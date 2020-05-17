@@ -5,7 +5,7 @@
     "database": "riddle",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "define": { "timestamps": false }
+    "operatorsAliases": false
   },
   "test": {
     "username": "root",

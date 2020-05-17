@@ -1,0 +1,103 @@
+{
+    "tables": {
+        "users": {
+            "tableName": "users",
+            "schema": {
+                "userId": {
+                    "allowNull": false,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "userId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "firstName": {
+                    "field": "firstName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastName": {
+                    "field": "lastName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "username": {
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "unique": true,
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "allowNull": false,
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "workouts": {
+            "tableName": "workouts",
+            "schema": {
+                "workoutId": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "workoutId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "userId": {
+                    "field": "userId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "userId"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "workoutStatus": {
+                    "field": "workoutStatus",
+                    "seqType": "Sequelize.STRING"
+                },
+                "workoutName": {
+                    "field": "workoutName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "noOfSets": {
+                    "field": "noOfSets",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "noOfReps": {
+                    "field": "noOfReps",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "noOfWeights": {
+                    "field": "noOfWeights",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "createdAt": {
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "Deleted": {
+                    "field": "Deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}

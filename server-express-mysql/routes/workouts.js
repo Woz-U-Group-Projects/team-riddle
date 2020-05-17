@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 var models = require("../models"); //<--- Add models
-var authService = require("../services/auth"); //<--- Add authentication service
+var auth = require("../services/auth"); //<--- Add authentication service
 
 
 
 router.get("/", function (req, res, next) {
   let token = req.cookies.jwt;
   if (token) {
-    authService.verifyUser(token).then(user => {
+    auth.verifyUser(token).then(user => {
       if (user) {
         models.workouts
           .findAll({
@@ -46,7 +46,7 @@ router.get("/:id", (req, res) => {
 router.post("/", function (req, res, next) {
   let token = req.cookies.jwt;
   if (token) {
-    authService.verifyUser(token).then(user => {
+    auth.verifyUser(token).then(user => {
       if (user) {
         models.workouts
           .findOrCreate({
