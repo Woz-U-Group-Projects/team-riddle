@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const models = require("../models/index");
 const bcrypt = require("bcryptjs");
 
-var auth = {
-  signUser: function(user) {
+module.exports = {
+  signUser: function (user) {
     const token = jwt.sign(
       {
         userId: user.userId,
@@ -12,31 +12,38 @@ var auth = {
         email: user.email,
         isLoggedIn: true
       },
-      "secretkey",
+      "secret",
       {
         expiresIn: "1h"
       }
     );
     return token;
   },
-  verifyUser: function(token) {
+  verifyUser: function (req, res, next) {
     //<--- receive JWT token as parameter
     try {
-      let decoded = jwt.verify(token, "secretkey"); //<--- Decrypt token using same key used to encrypt
-      return models.users.findByPk(decoded.UserId); //<--- Return result of database query as promise
+      let token = req.cookies.jwt;
+      let decoded = jwt.verify(token, "secret"); //<--- Decrypt token using same key used to encrypt
+      req.userData = decoded;
+      return models.users.findOne({
+        where: {
+          userId: decoded.userId
+        }
+      })
+        .then(user => {
+          req.user = user;
+          next();
+        }); //<--- Return result of database query as promise
     } catch (err) {
       console.log(err);
       return null;
     }
   },
-  hashPassword: function(plainTextPassword) {
+  hashPassword: function (plainTextPassword) {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(plainTextPassword, salt);
     return hash;
-  },
-  comparePasswords: function(plainTextPassword, hashedPassword) {
-    return bcrypt.compareSync(plainTextPassword, hashedPassword);
   }
 };
 
-module.exports = auth;
+

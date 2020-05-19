@@ -19,9 +19,7 @@ class Workoutdetails extends React.Component {
       return axios
       .get("http://localhost:3001/users/workouts/" + workoutId )
       .then(res => {
-        this.setState({
-            workoutData: res.data
-        })
+        this.setState({workoutData: res.data })
       })
     }
 
@@ -54,6 +52,7 @@ class Workoutdetails extends React.Component {
   componentDidMount() {
     this.fetchWorkoutData();
   } 
+
 
 
   render() {

@@ -5,9 +5,6 @@ import UserMenu from '../components/usermenu';
 const Workoutdetail = () => (
   <div>
      
-  <div>
-    <UserMenu />
-    </div>
     <div>
     <Workoutdetails uri="http://localhost:3001/workouts/workouts/:id" />
   </div>

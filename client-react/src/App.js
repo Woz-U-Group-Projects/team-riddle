@@ -8,7 +8,6 @@ import Profile from './screens/Profile';
 import Register from './screens/Register';
 import Logout from './components/logout';
 import Workouts from './screens/Workouts';
-
 import Workoutdetails from './components/workoutdetails';
 
 
