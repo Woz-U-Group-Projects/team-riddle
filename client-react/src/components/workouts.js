@@ -29,7 +29,7 @@ class Workouts extends React.Component {
     // this.Weights = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
   handleChange(event) {
     this.setState({
@@ -53,7 +53,7 @@ class Workouts extends React.Component {
         console.log(this.workoutData);
       });
   }
-  onSubmit(event) {
+  handleSubmit(event) {
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
 
@@ -89,12 +89,12 @@ class Workouts extends React.Component {
           <h3>No Workouts Tracked Yet!</h3>
           <p> Start Logging in Workouts Below.</p></div>
         <div className="card-container">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <div>
               <label htmlFor="workoutName">Workout Name: </label>
               <input type="text" name="workoutName" onChange={this.handleChange}></input>
             </div>
-             <div>
+            <div>
               <label htmlFor="noOfSets">Number of Sets: </label>
               <input type="number" name="noOfSets" onChange={this.handleChange}></input>
             </div>
@@ -105,10 +105,10 @@ class Workouts extends React.Component {
             <div>
               <label htmlFor="noOfWeights">Number of Weights(lbs): </label>
               <input type="number" name="noOfWeights" onChange={this.handleChange}></input>
-            </div> 
+            </div>
 
             <div>
-              <button type="submit" >Create Workout</button>
+              <button type="submit" value="Submit" >Create Workout</button>
             </div>
           </form>
         </div>
@@ -137,7 +137,7 @@ class Workouts extends React.Component {
       </div>
       <br /> <br />
       <div className="card-container">
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <h3>Add A Workout</h3>
           <div>
             <label htmlFor="workoutName">Workout Name: </label>
@@ -157,7 +157,7 @@ class Workouts extends React.Component {
           </div>
 
           <div>
-            <button type="submit" >Create Workout</button>
+            <button type="submit" value="Submit">Create Workout</button>
           </div>
         </form>
       </div>

@@ -70,7 +70,7 @@ class Workoutdetails extends React.Component {
     <h3>Editing {this.state.workoutData.workoutName}</h3>
     <form onSubmit={this.onSubmit}>
  <div>
-     <label htmlFor="workoutName">To Do Name: </label>
+     <label htmlFor="workoutName">Workout Name: </label>
      <input type="text" name="workoutName" id="workoutName" defaultValue={this.state.workoutData.workoutName} />
  </div>
  <div>

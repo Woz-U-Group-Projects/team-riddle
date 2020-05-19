@@ -8,23 +8,23 @@ const bcrypt = require('bcryptjs');
 
 process.env.SECRET_KEY = 'secret'
 /* GET users listing. */
-
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   models.users
-  .findAll({})
-  .then(allUsers => {
-    res.send(JSON.stringify(allUsers));
-  })
+    .findAll({})
+    .then(allUsers => {
+      res.send(JSON.stringify(allUsers));
+    })
 });
 
-router.get('/login', function(req,res,next) {
+
+router.get('/login', function (req, res, next) {
   res.render('login');
-});
-
+})
 router.get('/register', function (req, res, next) {
   res.render('register');
-});
+})
 router.post('/register', function (req, res, next) {
+  const hashedPassword = auth.hashPassword(req.body.password);
   models.users
     .findOne({
       where: {
@@ -36,14 +36,13 @@ router.post('/register', function (req, res, next) {
         res.send('this user already exists');
       } else {
         const code = Math.random().toString(36).substr(2, 9) + req.body.lastName;
-        console.log(req.body.password);
 
         models.users
           .create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: auth.hashPassword(req.body.password), //<--- Change to this code here
+            password: hashedPassword,
             username: req.body.email
           })
           .then(createdUser => {
@@ -60,7 +59,11 @@ router.post('/register', function (req, res, next) {
           });
       }
     })
-});
+})
+
+
+
+
 
 //Login
 router.get('/login', function (req, res, next) {
@@ -68,34 +71,29 @@ router.get('/login', function (req, res, next) {
 })
 router.post('/login', function (req, res, next) {
   const hashedPassword = auth.hashPassword(req.body.password);
-  models.users
-    .findOne({
-      where: {
-        email: req.body.email
-      }
-    })
-    .then(user => {
-      const isMatch=user.comparePassword(req.body.password)
-      console.log(isMatch)
-      if (!user) {
-        console.log("User not found");
-        return res.status(401).json({
-          message: "Login Failed"
-        });
-      }
-        if (isMatch) {
-          let userId=user.userId;
-          let token = auth.signUser(user);
-          res.cookie('jwt', token);
-          res.send(token);
-        }
-        else {
-          console.log('Wrong password');
-          // res.redirect('/users/login')
-          res.send('Wrong password');
-        }
-      }
-    );
+  models.users.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(user => {
+    const isMatch = user.comparePassword(req.body.password)
+    console.log(isMatch)
+    if (!user) {
+      return res.status(401).json({
+        message: "Login Failed"
+      });
+    }
+    if (isMatch) {
+      const userId = user.userId
+      const token = auth.signUser(user);
+      res.cookie('jwt', token);
+      res.send(token);
+
+    } else {
+      console.log(error);
+      // res.redirect('/users/login')
+    }
+  });
 });
 
 router.get('/profile/:id', auth.verifyUser, function (req, res, next) {
@@ -106,18 +104,19 @@ router.get('/profile/:id', auth.verifyUser, function (req, res, next) {
       FirstName: req.user.firstName,
       LastName: req.user.lastName,
       Email: req.user.email,
-      userId: req.user.userId,
+      UserId: req.user.userId,
     })
   }
 });
 
-router.get('/logout', function (req, res,next) {
-  res.cookie("jwt", "", { expires: new Date(0) });
+
+router.get('/logout', function (req, res) {
+  res.cookie('jwt', null);
   res.redirect('/users/login');
 });
 
 
-// CRUD
+// To DO CRUD
 
 router.post('/userworkouts', function (req, res, next) {
 
@@ -133,7 +132,9 @@ router.post('/userworkouts', function (req, res, next) {
     })
 });
 
-router.post("/workouts", function (req, res, next) {
+
+router.post('/workouts', (req, res) => {
+
   models.workouts
     .findOrCreate({
       where: {
@@ -143,32 +144,35 @@ router.post("/workouts", function (req, res, next) {
         noOfReps: req.body.noOfReps,
         noOfWeights: req.body.noOfWeights,
       },
-      include:[model.users]
+      include: [models.users]
     })
-    .spread((result, created) => {
+    .spread(function (result, created) {
       if (created) {
         res.send(result)
-      }else {
-        res.send("Must be logged in");
-    }
-});
+      } else {
+        res.send('');
+      }
+
+    });
 });
 
-router.get("workouts/:id", (req, res) => {
+router.get('/workouts/:id', (req, res) => {
   let workoutId = parseInt(req.params.id);
   models.workouts
     .find({
       where: {
         workoutId: workoutId,
+
       },
       include: [models.users]
     })
     .then(workout => {
+
       res.send(JSON.stringify(workout))
     })
 });
 
-router.put("/workouts/:id", (req, res) => {
+router.put('/workouts/:id', (req, res) => {
   let workoutId = parseInt(req.params.id);
   models.workouts
     .update({
@@ -189,8 +193,7 @@ router.put("/workouts/:id", (req, res) => {
     });
 });
 
-
-router.delete("/workouts/:id/delete", (req, res) => {
+router.delete('/workouts/:id/delete', (req, res) => {
   let workoutId = parseInt(req.params.id);
   models.workouts
     .update(
@@ -206,36 +209,10 @@ router.delete("/workouts/:id/delete", (req, res) => {
     .then(workout => {
       res.send(JSON.stringify(workout))
     })
+
 });
 
 
 
-/* router.get("/", function (req, res, next) {
-  let token = req.cookies.jwt;
-  if (token) {
-    auth.verifyUser(token).then(user => {
-      if (user) {
-        models.workouts
-          .findAll({
-            where: { userId: user.userId, Deleted: false }
-          })
-          .then(result => res.render("workouts", { workouts: result }));
-        //console.log(user.posts);
-        //res.render("posts", { posts: user.posts });
-        //res.send(JSON.stringify(user));
-      } else {
-        res.status(401);
-        res.send("Invalid authentication token");
-      }
-    });
-  } else {
-    res.status(401);
-    res.send("Must be logged in");
-  }
-}); */
 module.exports = router;
-
-
-
-
 
