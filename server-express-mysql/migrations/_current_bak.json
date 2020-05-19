@@ -43,36 +43,6 @@
             },
             "indexes": []
         },
-        "Vitals": {
-            "tableName": "Vitals",
-            "schema": {
-                "id": {
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "name": {
-                    "field": "name",
-                    "seqType": "Sequelize.STRING"
-                },
-                "complete": {
-                    "field": "complete",
-                    "seqType": "Sequelize.BOOLEAN"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
         "workouts": {
             "tableName": "workouts",
             "schema": {
@@ -129,5 +99,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }
