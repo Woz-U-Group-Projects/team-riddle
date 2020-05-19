@@ -1,6 +1,6 @@
 import React from 'react';
 import RegisterForm from '../components/register';
-import HomePage from '../components/home';
+import HomeMenu from '../components/homemenu';
 
 
 const Register = () => (
@@ -8,7 +8,7 @@ const Register = () => (
 
 
   <div>
-<HomePage /> 
+<HomeMenu /> 
 
     
     <RegisterForm />

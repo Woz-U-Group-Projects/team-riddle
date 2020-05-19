@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import logo from '../logo.png';
 
-const HomePage = () => {
+const HomeMenu = () => {
     window.ondeforeunload = () => {
       localStorage.clear();
     }
@@ -26,4 +26,4 @@ const HomePage = () => {
     );
   };
 
-  export default withRouter(HomePage);
+  export default withRouter(HomeMenu);

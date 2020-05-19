@@ -1,12 +1,12 @@
 import React from 'react';
-import HomePage from '../components/home';
+import HomeMenu from '../components/homemenu';
 
 
 const Home = () => (
   
    
     <div>
-     <HomePage />
+     <HomeMenu />
      
      <div className="card-container">
      <h4>Keep Your Fitness Moving<br />

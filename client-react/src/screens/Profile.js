@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfilePage from '../components/profile';
+import ProfileComponent from '../components/profile';
 import UserMenu from '../components/usermenu';
 
 const Profile = () => (
@@ -8,7 +8,7 @@ const Profile = () => (
   <UserMenu />
   </div>
   <div>
-    <ProfilePage />    
+    <ProfileComponent/>    
   </div>
   </div>
 );

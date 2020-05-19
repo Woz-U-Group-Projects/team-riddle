@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import auth from '../components/auth';
 import { withRouter } from "react-router-dom";
 
-class ProfilePage extends React.Component {
+class ProfileComponent extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -55,4 +55,4 @@ class ProfilePage extends React.Component {
         )
     }
 }
-export default withRouter(ProfilePage);
+export default withRouter(ProfileComponent);

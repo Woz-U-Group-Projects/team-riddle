@@ -1,11 +1,11 @@
 import React from 'react';
 import LoginForm from '../components/login';
-import HomePage from '../components/home';
+import HomeMenu from '../components/homemenu';
 
 const Login = () => (
   <div>
     <div>
-    <HomePage />
+    <HomeMenu />
     </div>
     <div>
     <LoginForm/>
