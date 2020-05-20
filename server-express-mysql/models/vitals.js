@@ -1,26 +1,22 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Vitals = sequelize.define(
-    "Vitals",
+  const vitals = sequelize.define(
+    "vitals",
     {
-      id: {
+      vitalId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
-      //heartreate - Integer
-
-      //temperature - Integer
-
-      //o2levels - Integer
-
-      name: DataTypes.STRING,
-      complete: DataTypes.BOOLEAN
+      heartRate: DataTypes.INTEGER,
+      temperature: DataTypes.INTEGER,
+      o2levels: DataTypes.INTEGER,
     },
-    {}
   );
-  Vitals.associate = function(models) {
-    // associations can be defined here
+  vitals.associate = function(models) {
+    vitals.belongsTo(models.users, {
+      foreignKey: "userId"
+    });
   };
-  return Vitals;
+  return vitals;
 };

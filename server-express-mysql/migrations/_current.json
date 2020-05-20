@@ -43,22 +43,26 @@
             },
             "indexes": []
         },
-        "Vitals": {
-            "tableName": "Vitals",
+        "vitals": {
+            "tableName": "vitals",
             "schema": {
-                "id": {
+                "vitalId": {
                     "primaryKey": true,
                     "autoIncrement": true,
-                    "field": "id",
+                    "field": "vitalId",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "name": {
-                    "field": "name",
-                    "seqType": "Sequelize.STRING"
+                "heartRate": {
+                    "field": "heartRate",
+                    "seqType": "Sequelize.INTEGER"
                 },
-                "complete": {
-                    "field": "complete",
-                    "seqType": "Sequelize.BOOLEAN"
+                "temperature": {
+                    "field": "temperature",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "o2levels": {
+                    "field": "o2levels",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -69,6 +73,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "userId"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -129,5 +144,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }

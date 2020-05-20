@@ -22,7 +22,7 @@ router.delete("/:id", function(req, res, next) {
     .then(task => task.destroy())
     .then(() => res.send({ taskId }))
     .catch(err => res.status(400).send(err));
-});
+}); 
 
 router.put("/:id", function(req, res, next) {
   models.Task.update(
