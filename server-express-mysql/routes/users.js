@@ -172,7 +172,7 @@ router.get('/workouts/:id', (req, res) => {
     })
 });
 
-router.put('/workouts/:id', (req, res) => {
+router.put('/workouts/:id', (req, res, next) => {
   let workoutId = parseInt(req.params.id);
   models.workouts
     .update({

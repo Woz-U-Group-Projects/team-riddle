@@ -19,9 +19,9 @@ const HomeMenu = () => {
       <Link to="/login">
         <button>Login</button>
       </Link>
-      <Link to="/profile">
+      {/* <Link to="/profile">
         <button>Profile</button>
-      </Link>
+      </Link> */}
     </div>
     );
   };

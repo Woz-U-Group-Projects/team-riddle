@@ -17,7 +17,7 @@ var upload = multer({ storage: storage})
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'SO FIT App' });
 });
 
 router.get('/feed', auth.verifyUser, function(req, res, next) {

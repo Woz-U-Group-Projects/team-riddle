@@ -20,14 +20,6 @@ class Workouts extends React.Component {
       noOfReps: '',
       noOfWeights: '',
     };
-
-
-    this.uId = React.createRef();
-    this.wName = React.createRef();
-    // this.Sets = React.createRef();
-    // this.Reps = React.createRef();
-    // this.Weights = React.createRef();
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
@@ -66,20 +58,6 @@ class Workouts extends React.Component {
     }
     newWorkout(user);
   }
-
-  // addWorkout = () => {
-  //   const token = localStorage.usertoken;
-  //   const decoded = jwt_decode(token);
-
-  //   let user = {
-  //     userId: decoded.userId,
-  //     workoutName: this.wName.current.value,
-  //   }
-  //   newWorkout(user);
-  // }
-
-
-
 
   render() {
     console.log(this.state.workoutData);
@@ -133,6 +111,7 @@ class Workouts extends React.Component {
     return <div>
       <div className="card-container">
         <h2>Workouts To Do</h2>
+        <div className="card-container">Click a Workout Below to Edit</div>
         <div className="workout-column">{workout}</div>
       </div>
       <br /> <br />

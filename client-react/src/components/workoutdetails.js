@@ -68,6 +68,7 @@ class Workoutdetails extends React.Component {
   </div>
     <div className="card-container">
     <h3>Editing {this.state.workoutData.workoutName}</h3>
+    <b>Update, Change Status, or Delete</b>
     <form onSubmit={this.onSubmit}>
  <div>
      <label htmlFor="workoutName">Workout Name: </label>

@@ -41,7 +41,7 @@ class RegisterForm extends React.Component {
             this.lName.current.value = "";
             this.useremail.current.value = "";
             this.pwd.current.value = "";
-            this.props.history.push('/profile');
+            this.props.history.push('/login');
         })
 
     }
