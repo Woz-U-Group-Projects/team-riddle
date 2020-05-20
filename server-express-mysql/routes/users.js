@@ -61,8 +61,18 @@ router.post('/register', function (req, res, next) {
     })
 })
 
-
-
+//User Welcome Page
+router.get('/welcome', auth.verifyUser, function (req, res, next) {
+  if (req.params.id !== String(req.user.userId)) {
+    res.send('You are not an authorized member')
+  } else {
+    res.render('welcome', {
+      FirstName: req.user.firstName,
+      LastName: req.user.lastName,
+      UserId: req.user.userId,
+    })
+  }
+});
 
 
 //Login
@@ -116,7 +126,7 @@ router.get('/logout', function (req, res) {
 });
 
 
-// To DO CRUD
+// Workout CRUD
 
 router.post('/userworkouts', function (req, res, next) {
 

@@ -73,3 +73,16 @@ export const newWorkout = workout => {
             noOfWeights: workout.noOfWeights
         })
 }
+
+//Count Workouts
+
+export const countWorkouts = userId => {
+    return axios.post(server + 'users/userworkouts', {
+        userId: userId
+    }).then(res => {
+            console.log(res.data)
+            return res.data;
+
+        })
+}
+

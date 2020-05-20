@@ -9,6 +9,7 @@ import Register from './screens/Register';
 import Logout from './components/logout';
 import Workouts from './screens/Workouts';
 import Workoutdetails from './components/workoutdetails';
+import UserHome from './screens/UserHome';
 
 
 
@@ -24,6 +25,7 @@ class App extends Component {
    
        <div>
           <Route exact path="/" component={Home} />
+          <Route exact path="/welcome" component={UserHome} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/profile" component={Profile}/>

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import logo from '../logo.png';
 
 const HomeMenu = () => {
-    window.ondeforeunload = () => {
+    window.onbeforeunload = () => {
       localStorage.clear();
     }
     

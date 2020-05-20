@@ -14,7 +14,7 @@ const UserMenu = () => {
     <div>
         
       <img src={logo} className="App-logo" alt="logo" />
-       <Link to="/">
+       <Link to="/welcome">
         <button>Home</button>
       </Link>
       <Link to="/profile">

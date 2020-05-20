@@ -45,6 +45,7 @@ class Workouts extends React.Component {
         console.log(this.workoutData);
       });
   }
+  
   handleSubmit(event) {
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
@@ -104,14 +105,22 @@ class Workouts extends React.Component {
         </Link>
       </div>
 
-
-
-
     ));
+
+    const workoutsToRender=this.state.workoutData.filter(workouts => (
+
+     <div key={workouts.workoutId}>
+      </div>
+      ));
+    const numRows=workoutsToRender.length
+    
     return <div>
       <div className="card-container">
         <h2>Workouts To Do</h2>
+        Number of Workouts = {numRows}
         <div className="card-container">Click a Workout Below to Edit</div>
+        <div>
+        </div>
         <div className="workout-column">{workout}</div>
       </div>
       <br /> <br />

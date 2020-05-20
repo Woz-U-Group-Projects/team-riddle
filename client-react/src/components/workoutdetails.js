@@ -9,6 +9,12 @@ class Workoutdetails extends React.Component {
   state = {
     workoutData: {}
   };
+  handleUpdate=()=>alert("Updated")
+  handleStatusChange = event =>{
+    this.setState({workoutData:event.target.value})
+  }
+  handleDelete=event=>alert("Deleted")
+  
   componentWillMount() { 
     if(auth() === false) {
         this.props.history.push('/login');
@@ -46,7 +52,7 @@ class Workoutdetails extends React.Component {
     e.preventDefault();
     const workoutId = this.props.match.params.id;
     $.ajax({
-      url: '/workouts' + workoutId + '/delete',
+      url: '/users/workouts/' + workoutId + '/delete',
       method: 'DELETE', complete: () => window.location = "/workouts/"
   })
   }
