@@ -19,7 +19,9 @@ class Workoutdetails extends React.Component {
       return axios
       .get("http://localhost:3001/users/workouts/" + workoutId )
       .then(res => {
-        this.setState({workoutData: res.data })
+        this.setState({
+          workoutData: res.data 
+        })
       })
     }
 
@@ -32,7 +34,7 @@ class Workoutdetails extends React.Component {
       const noOfWeights = document.getElementById('noOfWeights').value;
       const workoutStatus = document.getElementById('workoutStatus').value;
       $.ajax({
-        url: '/workouts' + workoutId,
+        url: '/users/workouts/' + workoutId,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({ workoutName: workoutName, noOfSets: noOfSets,
           noOfReps: noOfReps, noOfWeights: noOfWeights, workoutStatus: workoutStatus }),
