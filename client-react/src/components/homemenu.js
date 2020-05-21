@@ -5,25 +5,37 @@ import { withRouter } from "react-router-dom";
 import logo from '../logo.png';
 
 const HomeMenu = () => {
-    window.onbeforeunload = () => {
-      localStorage.clear();
-    }
-    
-    return (
-  
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <Link to="/register">
-        <button>Register</button>
-      </Link>
-      <Link to="/login">
-        <button>Login</button>
-      </Link>
+  window.onbeforeunload = () => {
+    localStorage.clear();
+  }
+
+  return (
+
+    <div className="card-container">
+      <div className="">
+        <img src={logo} className="App-logo" alt="logo" />
+      </div>
+      <div className="">
+        <p><Link to="/register">
+          <button>I'M NEW</button>
+        </Link>
+        </p>
+      </div>
+      <div className=""><h6>Already a member?</h6>
+
+        <Link to="/login">
+          <button>SIGN IN</button>
+        </Link>
+ </div>
+
+
+
+
       {/* <Link to="/profile">
         <button>Profile</button>
       </Link> */}
     </div>
-    );
-  };
+  );
+};
 
-  export default withRouter(HomeMenu);
+export default withRouter(HomeMenu);

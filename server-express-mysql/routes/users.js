@@ -47,7 +47,6 @@ router.post('/register', function (req, res, next) {
             weight: req.body.weight,
             height: req.body.height,
             birthday: req.body.birthday,
-
           })
           .then(createdUser => {
             const isMatch = createdUser.comparePassword(req.body.password);
@@ -115,18 +114,44 @@ router.get('/profile/:id', auth.verifyUser, function (req, res, next) {
     res.send('This is not your profile')
   } else {
     res.render('profile', {
-      FirstName: req.user.firstName,
-      LastName: req.user.lastName,
-      Email: req.user.email,
-      UserId: req.user.userId,
-      UserName:req.user.userName,
-      Password:req.user.password,
-      Weight:req.body.weight,
-      Height:req.body.height,
-      Birthday:req.body.birthday
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      userId: req.user.userId,
+      userName: req.user.userName,
+      password: req.user.password,
+      weight: req.body.weight,
+      height: req.body.height,
+      birthday: req.body.birthday
     })
   }
 });
+
+router.put('/profile/:id', (req, res, next) => {
+  let userId = parseInt(req.params.id);
+  models.users
+    .update({
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      userId: req.user.userId,
+      userName: req.user.userName,
+      password: req.user.password,
+      weight: req.body.weight,
+      height: req.body.height,
+      birthday: req.body.birthday
+        },
+      {
+        where: {
+          userId: userId
+        },
+
+      })
+    .then(user => {
+      res.send(JSON.stringify(user));
+    });
+});
+
 
 
 router.get('/logout', function (req, res) {
@@ -226,7 +251,7 @@ router.delete('/workouts/:id/delete', (req, res) => {
 
       })
     .then(workout => {
-      res.send(JSON.stringify(workout))
+      res.send(JSON.stringify(workout));
     })
 
 });

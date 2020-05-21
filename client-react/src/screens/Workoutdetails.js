@@ -6,7 +6,7 @@ const Workoutdetail = () => (
   <div>
      
     <div>
-    <Workoutdetails uri="http://localhost:3001/workouts/workouts/:id" />
+    <Workoutdetails uri="http://localhost:3001/users/workouts/:id" />
   </div>
 
 </div>
