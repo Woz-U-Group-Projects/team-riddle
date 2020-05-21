@@ -10,15 +10,22 @@ class RegisterForm extends React.Component {
             firstName: '',
             lastName: '',
             email: '',
+            userName: '',
             password: '',
+            weight: '',
+            height: '',
+            birthday: '',
+
         }
         this.fName = React.createRef();
-
         this.lName = React.createRef();
-
         this.useremail = React.createRef();
-
+        this.usrName = React.createRef();
         this.pwd = React.createRef();
+        this.wt = React.createRef();
+        this.ht = React.createRef();
+        this.bday = React.createRef();
+
 
         this.handleChange = this.handleChange.bind(this)
         // this.onSubmit = this.onSubmit.bind(this)
@@ -34,13 +41,22 @@ class RegisterForm extends React.Component {
             firstName: this.fName.current.value,
             lastName: this.lName.current.value,
             email: this.useremail.current.value,
-            password: this.pwd.current.value
+            userName: this.usrName.current.value,
+            password: this.pwd.current.value,
+            weight: this.wt.current.value,
+            height: this.ht.current.value,
+            birthday: this.bday.current.value,
+
         }).then(response => {
             console.log("user created");
             this.fName.current.value = "";
             this.lName.current.value = "";
             this.useremail.current.value = "";
+            this.usrName.current.value="";
             this.pwd.current.value = "";
+            this.wt.current.value="";
+            this.ht.current.value="";
+            this.bday.current.value="";
             this.props.history.push('/login');
         })
 
@@ -84,9 +100,27 @@ class RegisterForm extends React.Component {
                     <input type="text" name="email" ref={this.useremail} required></input>
                 </div>
                 <div>
-                    <label htmlFor="password">Password: </label>
-                    <input type="text" name="password" ref={this.pwd} required></input>
+                    <label htmlFor="user">Username: </label>
+                    <input type="text" name="userName" ref={this.usrName} required></input>
                 </div>
+                <div>
+                    <label htmlFor="password">Passowrd: </label>
+                    <input type="password" name="userName" ref={this.pwd} required></input>
+                </div>
+
+                <div>
+                    <label htmlFor="weight">Weight: </label>
+                    <input type="number" name="weight" ref={this.wt} required></input>
+                </div>
+                <div>
+                    <label htmlFor="height">Height: </label>
+                    <input type="number" name="height" ref={this.ht} required></input>
+                </div>
+                <div>
+                    <label htmlFor="birthday">Birthday: </label>
+                    <input type="date" name="birthday" ref={this.bday} required></input>
+                </div>
+
                 <div>
                     <button type="button" onClick={this.addUser} >Submit</button>
                 </div>

@@ -42,8 +42,12 @@ router.post('/register', function (req, res, next) {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
+            userName: req.body.userName,
             password: hashedPassword,
-            username: req.body.email
+            weight: req.body.weight,
+            height: req.body.height,
+            birthday: req.body.birthday,
+
           })
           .then(createdUser => {
             const isMatch = createdUser.comparePassword(req.body.password);
@@ -115,6 +119,11 @@ router.get('/profile/:id', auth.verifyUser, function (req, res, next) {
       LastName: req.user.lastName,
       Email: req.user.email,
       UserId: req.user.userId,
+      UserName:req.user.userName,
+      Password:req.user.password,
+      Weight:req.body.weight,
+      Height:req.body.height,
+      Birthday:req.body.birthday
     })
   }
 });

@@ -18,7 +18,7 @@ const UserMenu = () => {
         <button>Home</button>
       </Link>
       <Link to="/profile">
-        <button>Profile</button>
+        <button>My Profile</button>
       </Link>
       <Link to="/workouts">
         <button>Workouts</button>

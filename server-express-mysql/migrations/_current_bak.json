@@ -18,8 +18,8 @@
                     "field": "lastName",
                     "seqType": "Sequelize.STRING"
                 },
-                "userName": {
-                    "field": "userName",
+                "username": {
+                    "field": "username",
                     "seqType": "Sequelize.STRING"
                 },
                 "email": {
@@ -31,18 +31,6 @@
                     "allowNull": false,
                     "field": "password",
                     "seqType": "Sequelize.STRING"
-                },
-                "weight": {
-                    "field": "weight",
-                    "seqType": "Sequelize.DECIMAL(4, 2)"
-                },
-                "height": {
-                    "field": "height",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "birthday": {
-                    "field": "birthday",
-                    "seqType": "Sequelize.DATE"
                 },
                 "createdAt": {
                     "field": "createdAt",
@@ -111,5 +99,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }
