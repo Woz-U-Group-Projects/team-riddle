@@ -52,7 +52,7 @@ router.post('/newpost', auth.verifyUser, function(req, res, next){
     message: req.body.message,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
-    username: req.user.username
+    userName: req.user.userName
   }).then(post => {
       res.redirect('feed'); 
   })

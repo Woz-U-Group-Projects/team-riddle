@@ -120,9 +120,9 @@ router.get('/profile/:id', auth.verifyUser, function (req, res, next) {
       userId: req.user.userId,
       userName: req.user.userName,
       password: req.user.password,
-      weight: req.body.weight,
-      height: req.body.height,
-      birthday: req.body.birthday
+      weight: req.user.weight,
+      height: req.user.height,
+      birthday: req.user.birthday
     })
   }
 });

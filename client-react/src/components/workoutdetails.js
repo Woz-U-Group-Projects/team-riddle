@@ -37,6 +37,7 @@ class Workoutdetails extends React.Component {
     alert("Updated");
     e.preventDefault();
     const workoutId = this.props.match.params.id;
+    console.log(workoutId)
     const workoutName = document.getElementById('workoutName').value;
     const noOfSets = document.getElementById('noOfSets').value;
     const noOfReps = document.getElementById('noOfReps').value;
@@ -108,8 +109,8 @@ class Workoutdetails extends React.Component {
                 </select>
               </div>
               <div>
-                <button type="submit" id="submitButton">Update</button>
-                <button onClick={this.onDelete} type="deleteButton" id="deleteButton">Delete</button>
+                <button type="submit" className="btn btn-primary" id="submitButton">Update</button>
+                <button onClick={this.onDelete} type="deleteButton" className="btn btn-danger" id="deleteButton">Delete</button>
               </div>
 
             </form>

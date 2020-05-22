@@ -100,7 +100,7 @@ class Workouts extends React.Component {
 
       <div key={workouts.workoutId}>
 
-        <Link to={{ pathname: `workouts/${workouts.workoutId}` }}>
+        <Link to={{ pathname: `/workouts/${workouts.workoutId}` }}>
           <p><b>{workouts.workoutName}</b>: {workouts.workoutStatus}</p>
         </Link>
       </div>

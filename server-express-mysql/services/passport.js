@@ -5,11 +5,11 @@ const auth = require("../services/auth");
 
 passport.use(
     'local',
-    new LocalStrategy(function(username, password, done) {
+    new LocalStrategy(function(userName, password, done) {
       models.users
         .findOne({
           where: {
-            username: username
+            userName: userName
           }
         })
         .then(user => {

@@ -9,14 +9,14 @@ const Home = () => (
     
      
      <div className="card-container">
-
+     <HomeMenu />
      <div className="">Welcome to World of Fitness.</div>
      <div className=""><p>SHO UR Fit.</p></div>
      <h4>Keep Your Fitness Moving!<br /></h4>
 
    
     </div>
-    <HomeMenu />
+  
     </div>
    
 );

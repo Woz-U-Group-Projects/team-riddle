@@ -29,7 +29,7 @@ class Users extends React.Component {
     }
     const user = this.state.userData.map(users => (
       <div key={users.userId}>
-        <em>{users.firstName}</em>: {users.username}
+        <em>{users.firstName}</em>: {users.userName}
       </div>
     ));
     return <div>{user}</div>;

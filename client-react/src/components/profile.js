@@ -45,6 +45,7 @@ class ProfileComponent extends React.Component {
             const token = localStorage.usertoken
             if (token !== undefined) {
                 const decoded = jwt_decode(token)
+                console.log(decoded)
                 this.setState({
                     firstName: decoded.firstName,
                     lastName: decoded.lastName,
@@ -80,10 +81,10 @@ class ProfileComponent extends React.Component {
                         <hr></hr>
                         {/* Profile Information */}
                         {/* <b>Change Info</b> */}
-                        <p> <label htmlFor="userName"><b>Username: {this.state.userName}</b></label>
+                        <p> <b>Username: {this.state.userName}</b>
                         </p>
 
-                        <p> <label htmlFor="firstName"><b>First Name: {this.state.firstName}</b></label>
+                        <p> <label htmlFor="firstName" ><b>First Name: {this.state.firstName}</b></label>
                         </p>
                         <p> <label htmlFor="lastName"><b>Last Name: {this.state.lastName}</b></label>
                         </p>

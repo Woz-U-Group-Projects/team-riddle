@@ -10,6 +10,10 @@ module.exports = {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        userName: user.userName,
+        weight: user.weight,
+        height: user.height,
+        birthday: user.birthday,
         isLoggedIn: true
       },
       "secret",

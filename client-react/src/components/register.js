@@ -9,6 +9,7 @@ class RegisterForm extends React.Component {
     constructor() {
         super()
         this.state = {
+            disabled:false,
             firstName: '',
             lastName: '',
             email: '',
@@ -25,34 +26,8 @@ class RegisterForm extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log(this.state);
+        //console.log(this.state);
     }
-
-    // addUser = () => {
-    //     axios.post("http://localhost:3001/users/register", {
-    //         firstName: this.fName.current.value,
-    //         lastName: this.lName.current.value,
-    //         email: this.useremail.current.value,
-    //         userName: this.usrName.current.value,
-    //         password: this.pwd.current.value,
-    //         weight: this.wt.current.value,
-    //         height: this.ht.current.value,
-    //         birthday: this.bday.current.value,
-
-    //     }).then(response => {
-    //         console.log("user created");
-    //         this.fName.current.value = "";
-    //         this.lName.current.value = "";
-    //         this.useremail.current.value = "";
-    //         this.usrName.current.value="";
-    //         this.pwd.current.value = "";
-    //         this.wt.current.value="";
-    //         this.ht.current.value="";
-    //         this.bday.current.value="";
-    //         this.props.history.push('/login');
-    //     })
-
-    // }
 
     onSubmit(event) {
         alert('it worked!');
@@ -105,50 +80,78 @@ class RegisterForm extends React.Component {
     // }
 
 
-
     render() {
-        return (
-            <div className="card-container">
-                <h3>TELL US ABOUT YOURSELF</h3>
-                <form id="signup" name="signup" noValidate onSubmit={this.onSubmit} >
-                    <div>
+        return (<div>
+            <form noValidate onSubmit={this.onSubmit} >
+                    <legend>TELL US ABOUT YOURSELF</legend>
+                    <div className="form-group">
                         <label htmlFor="firstName">First Name: </label>
-                        <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required></input>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="firstName"
+                            
+                            placeholder="Enter First Name"
+                            value={this.state.firstName} onChange={this.handleChange} required/>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="lastName">Last Name: </label>
-                        <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required></input>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter Last Name" 
+                            name="lastName"
+                            value={this.state.lastName} 
+                            onChange={this.handleChange} 
+                            />
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="email">Email: </label>
-                        <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required></input>
+                        <input
+                            type="email"
+                            className="form-control"
+                        name="email"
+                            value={this.state.email} 
+                            onChange={this.handleChange} required>
+
+                            </input>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="user">Username: </label>
-                        <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} required></input>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="userName"
+                            placeholder="Enter Username"
+                        value={this.state.userName} onChange={this.handleChange} required></input>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required></input>
+                        <input
+                            type="password"
+                            className="form-control"
+                            name="password"
+                            placeholder="Password"
+                            value={this.state.password} onChange={this.handleChange} required></input>
                     </div>
 
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="weight">Weight: </label>
                         <input type="number" name="weight" value={this.state.weight} onChange={this.handleChange} required></input>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="height">Height: </label>
                         <input type="number" name="height" value={this.state.height} onChange={this.handleChange} required></input>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label htmlFor="birthday">Birthday: </label>
                         <input type="date" name="birthday" value={this.state.birthday} onChange={this.handleChange} required></input>
                     </div>
-                    <div>
-                        <button type="submit" >SIGN UP</button>
-                    </div>
-                </form>
-            </div>
+                    <fieldset>
+                    <button type="submit" class="btn btn-primary" >SIGN UP</button>
+                    </fieldset>
+            </form>
+        </div>
         )
     }
 

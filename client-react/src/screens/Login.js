@@ -6,7 +6,7 @@ import logo from '../logo.png';
 const Login = () => (
   <div>
     <div>
-      <img src={logo} className="App-logo" alt="logo" />
+    <HomeMenu />
     </div>
     <div>
       <LoginForm />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
-import './App.css';
+import './task.min.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './screens/Home';
 import Login from './screens/Login';
