@@ -22,26 +22,7 @@ constructor(props) {
   const show = (this.state.menu) ? "show" : "" ;
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">SHO UR Fit</a>
-      <button className="navbar-toggler" type="button" onClick={ this.toggleMenu }>
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className={"collapse navbar-collapse " + show}>
-        <div className="navbar-nav">
-          <a className="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-          <a className="nav-item nav-link" href="/login">Log In</a>
-          <a className="nav-item nav-link" href="/register">Register</a>
-          {/* <a className="nav-item nav-link" href="/">Logout</a> */}
-        </div>
-      </div>
-    </nav>
-
-  );
-  }
-}
-
-    //     <div className="card-container">
+ //     <div className="card-container">
     //       <div className="">
     //         <img src={logo} className="App-logo" alt="logo" />
     //       </div>
@@ -62,5 +43,10 @@ constructor(props) {
     //       </Link> */}
     //     </div>
 
+  );
+  }
+}
+
+   
 
 export default withRouter(HomeMenu);

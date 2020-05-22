@@ -7,11 +7,12 @@ const UserHome = () => (
 
 
     <div>
+
         <UserMenu />
             <WelcomeComponent />
-        
-    </div>
 
+       
+    </div>
 
 );
 

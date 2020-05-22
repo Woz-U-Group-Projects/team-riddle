@@ -9,7 +9,7 @@ class RegisterForm extends React.Component {
     constructor() {
         super()
         this.state = {
-            disabled:false,
+            disabled: false,
             firstName: '',
             lastName: '',
             email: '',
@@ -30,7 +30,6 @@ class RegisterForm extends React.Component {
     }
 
     onSubmit(event) {
-        alert('it worked!');
         event.preventDefault()
         const user = {
             firstName: this.state.firstName,
@@ -81,76 +80,98 @@ class RegisterForm extends React.Component {
 
 
     render() {
+
         return (<div>
-            <form noValidate onSubmit={this.onSubmit} >
-                    <legend>TELL US ABOUT YOURSELF</legend>
-                    <div className="form-group">
-                        <label htmlFor="firstName">First Name: </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="firstName"
-                            
-                            placeholder="Enter First Name"
-                            value={this.state.firstName} onChange={this.handleChange} required/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="lastName">Last Name: </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter Last Name" 
-                            name="lastName"
-                            value={this.state.lastName} 
-                            onChange={this.handleChange} 
+  
+            <div className="jumbotron">
+                <h3 className="display-6 text-center">TELL US ABOUT YOURSELF</h3>
+                <hr className="my-4"></hr>
+                <form noValidate onSubmit={this.onSubmit} >
+                    <fieldset>
+                        <div className="form-group">
+                            <label htmlFor="firstName">First Name: </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="firstName"
+
+                                placeholder="Enter First Name"
+                                value={this.state.firstName} onChange={this.handleChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="lastName">Last Name: </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter Last Name"
+                                name="lastName"
+                                value={this.state.lastName}
+                                onChange={this.handleChange}
                             />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email: </label>
-                        <input
-                            type="email"
-                            className="form-control"
-                        name="email"
-                            value={this.state.email} 
-                            onChange={this.handleChange} required>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email">Email: </label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                placeholder="Enter Email"
+
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange} required>
 
                             </input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="user">Username: </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="userName"
-                            placeholder="Enter Username"
-                        value={this.state.userName} onChange={this.handleChange} required></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password: </label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            placeholder="Password"
-                            value={this.state.password} onChange={this.handleChange} required></input>
-                    </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="user">Username: </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="userName"
+                                placeholder="Enter Username"
+                                value={this.state.userName} onChange={this.handleChange} required></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password: </label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                placeholder="Enter Password"
+                                value={this.state.password} onChange={this.handleChange} required></input>
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="weight">Weight: </label>
-                        <input type="number" name="weight" value={this.state.weight} onChange={this.handleChange} required></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="height">Height: </label>
-                        <input type="number" name="height" value={this.state.height} onChange={this.handleChange} required></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="birthday">Birthday: </label>
-                        <input type="date" name="birthday" value={this.state.birthday} onChange={this.handleChange} required></input>
-                    </div>
-                    <fieldset>
-                    <button type="submit" class="btn btn-primary" >SIGN UP</button>
+                        <div className="form-group">
+                            <label htmlFor="weight">Weight: </label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                name="weight"
+                                placeholder="Enter Weight (lbs.)"
+                                value={this.state.weight} onChange={this.handleChange} required></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="height">Height: </label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Enter Height (in)"
+                                name="height"
+                                value={this.state.height} onChange={this.handleChange} required></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="birthday">Birthday: </label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                name="birthday" value={this.state.birthday} onChange={this.handleChange} required></input>
+                        </div>
                     </fieldset>
-            </form>
+                    <fieldset>
+                        <button type="submit" className="btn btn-outline-info btn-lg btn-block" >SIGN UP</button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
         )
     }

@@ -31,6 +31,8 @@ class App extends Component {
           <Route exact path="/profile" component={Profile}/>
           <Route exact path="/workouts" component={Workouts}/>
           <Route exact path="/workouts/:id" component={Workoutdetails}  />
+          <Route exact path="/logout" component={Logout}  />
+
       </div>
       </div>
       </Router>

@@ -45,18 +45,22 @@ class WelcomeComponent extends React.Component {
         const workoutsToRender = this.state.workoutData.filter(workouts => workouts.workoutId)
         const numRows = workoutsToRender.length
         return (
-            <div>
-                <div className="card-container">
-                    <h2>Hey, {this.state.firstName} <span role="img" aria-label="hello">👋</span></h2>
-                         You have {numRows} Workouts Logged<br />
 
-                        <hr></hr>
 
-                        <h2><i>Stay fit from the comfort of your home!</i></h2>
-
+     
+                <div className="jumbotron bg-dark text-white" style={{height:"150vh"}}>
+                    <h1 className="display-5
+                     text-center">Welcome, {this.state.firstName} <span role="img" aria-label="hello">👋</span></h1>
+                    <p className="lead text-center">
+                        You have {numRows} Workouts Logged<br /></p>
+                    <hr className="my-4"></hr>
+                    <p className="lead text-center"><h2><i>Stay fit from the comfort of your home!</i></h2></p>
+                    <p className="lead">
+                        <a className="btn btn-primary btn-lg btn-block my-2" href="/workouts" role="button">Let's Workout</a>
+                    </p>
+                    
                 </div>
-
-            </div>
+          
         )
 
     }
