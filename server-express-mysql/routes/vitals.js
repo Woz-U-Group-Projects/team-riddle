@@ -1,40 +1,53 @@
 var express = require("express");
 var router = express.Router();
 var models = require("../models");
-
-
+var auth = require("../services/auth");
 
 router.get("/", function(req, res, next) {
-  models.Task.findAll().then(tasks => res.json(tasks));
-  
+  // let token = req.cookies.jwt;
+  // if (token) {
+  //   auth.verifyUser(token).then(user => {
+  //     if (user) {
+  models.vitals
+    .findAll({
+      //where: { userId: user.userId, Deleted: false }
+    })
+    .then(result => res.render("vitals", { vitals: result }));
+  //     } else {
+  //       res.status(401);
+  //       res.send("Invalid authentication token");
+  //     }
+  //   });
+  // } else {
+  //   res.status(401);
+  //   res.send("Must be logged in");
+  // }
+});
+
+router.get("/:id", (req, res) => {
+  let vitalId = parseInt(req.params.id);
+  models.vitals
+    .find({
+      where: {
+        vitalId: vitalId
+      },
+      include: [models.users]
+    })
+    .then(vital => {
+      res.send(JSON.stringify(vital));
+    });
 });
 
 router.post("/", function(req, res, next) {
-  let newTask = new models.Task();
-  newTask.name = req.body.name;
-  newTask.complete = req.body.complete;
-  newTask.save().then(task => res.json(task));
+  let newVitals = new models.vitals();
+
+  newVitals.userId = req.body.userId;
+  newVitals.vitalName = req.body.vitalName;
+  newVitals.heartRate = req.body.heartRate;
+  newVitals.temperature = req.body.temperature;
+  newVitals.o2levels = req.body.o2levels;
+  newVitals.save().then(vitals => res.json(vitals));
+
 });
-
-router.delete("/:id", function(req, res, next) {
-  let taskId = parseInt(req.params.id);
-  models.Task.findByPk(taskId)
-    .then(task => task.destroy())
-    .then(() => res.send({ taskId }))
-    .catch(err => res.status(400).send(err));
-}); 
-
-router.put("/:id", function(req, res, next) {
-  models.Task.update(
-    {
-      name: req.body.name,
-      complete: req.body.complete
-    },
-    {
-      where: { id: parseInt(req.params.id) }
-    }
-  ).then(task => res.json(task));
-});
-
 
 module.exports = router;
