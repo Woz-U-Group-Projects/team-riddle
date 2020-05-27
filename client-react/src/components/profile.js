@@ -76,7 +76,7 @@ class ProfileComponent extends React.Component {
             return (
 
                 <div>
-                    <div className="card-container">
+                    <div className="card-container" style={{backgroundColor:"black",color:"white", height:"100vh"}}>
                         <h2>Hi, {this.state.firstName}<br /></h2>
                         <hr></hr>
                         {/* Profile Information */}
